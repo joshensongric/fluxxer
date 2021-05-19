@@ -1,4 +1,4 @@
-package com.flutterflow.tutorial
+package uk.fluxtogether.app
 
 import io.flutter.embedding.android.FlutterActivity
 

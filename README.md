@@ -1,4 +1,4 @@
-# tutorial
+# fluxtogether
 
 A new Flutter project.
 
