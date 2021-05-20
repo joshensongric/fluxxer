@@ -9,7 +9,7 @@ import 'schema/transactions_record.dart';
 import 'schema/goals_record.dart';
 import 'schema/steps_record.dart';
 import 'schema/circles_record.dart';
-import 'schema/transaction_categories_record.dart';
+import 'schema/categories_record.dart';
 import 'schema/serializers.dart';
 
 export 'schema/users_record.dart';
@@ -17,7 +17,7 @@ export 'schema/transactions_record.dart';
 export 'schema/goals_record.dart';
 export 'schema/steps_record.dart';
 export 'schema/circles_record.dart';
-export 'schema/transaction_categories_record.dart';
+export 'schema/categories_record.dart';
 
 Stream<List<UsersRecord>> queryUsersRecord(
         {Query Function(Query) queryBuilder,
@@ -55,12 +55,11 @@ Stream<List<CirclesRecord>> queryCirclesRecord(
     queryCollection(CirclesRecord.collection, CirclesRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Stream<List<TransactionCategoriesRecord>> queryTransactionCategoriesRecord(
+Stream<List<CategoriesRecord>> queryCategoriesRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(TransactionCategoriesRecord.collection,
-        TransactionCategoriesRecord.serializer,
+    queryCollection(CategoriesRecord.collection, CategoriesRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

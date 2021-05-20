@@ -26,22 +26,7 @@ abstract class TransactionsRecord
   DocumentReference get user;
 
   @nullable
-  String get email;
-
-  @nullable
-  @BuiltValueField(wireName: 'display_name')
-  String get displayName;
-
-  @nullable
-  @BuiltValueField(wireName: 'photo_url')
-  String get photoUrl;
-
-  @nullable
-  String get uid;
-
-  @nullable
-  @BuiltValueField(wireName: 'created_time')
-  Timestamp get createdTime;
+  DocumentReference get category;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -49,11 +34,7 @@ abstract class TransactionsRecord
 
   static void _initializeBuilder(TransactionsRecordBuilder builder) => builder
     ..merchant = ''
-    ..amount = 0.0
-    ..email = ''
-    ..displayName = ''
-    ..photoUrl = ''
-    ..uid = '';
+    ..amount = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -73,11 +54,7 @@ Map<String, dynamic> createTransactionsRecordData({
   String merchant,
   double amount,
   DocumentReference user,
-  String email,
-  String displayName,
-  String photoUrl,
-  String uid,
-  Timestamp createdTime,
+  DocumentReference category,
 }) =>
     serializers.serializeWith(
         TransactionsRecord.serializer,
@@ -86,22 +63,13 @@ Map<String, dynamic> createTransactionsRecordData({
           ..merchant = merchant
           ..amount = amount
           ..user = user
-          ..email = email
-          ..displayName = displayName
-          ..photoUrl = photoUrl
-          ..uid = uid
-          ..createdTime = createdTime));
+          ..category = category));
 
 TransactionsRecord get dummyTransactionsRecord {
   final builder = TransactionsRecordBuilder()
     ..date = dummyTimestamp
     ..merchant = dummyString
-    ..amount = dummyDouble
-    ..email = dummyString
-    ..displayName = dummyString
-    ..photoUrl = dummyImagePath
-    ..uid = dummyString
-    ..createdTime = dummyTimestamp;
+    ..amount = dummyDouble;
   return builder.build();
 }
 

@@ -19,6 +19,9 @@ abstract class GoalsRecord implements Built<GoalsRecord, GoalsRecordBuilder> {
   BuiltList<DocumentReference> get steps;
 
   @nullable
+  DocumentReference get user;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -40,12 +43,14 @@ abstract class GoalsRecord implements Built<GoalsRecord, GoalsRecordBuilder> {
 
 Map<String, dynamic> createGoalsRecordData({
   String goalName,
+  DocumentReference user,
 }) =>
     serializers.serializeWith(
         GoalsRecord.serializer,
         GoalsRecord((g) => g
           ..goalName = goalName
-          ..steps = null));
+          ..steps = null
+          ..user = user));
 
 GoalsRecord get dummyGoalsRecord {
   final builder = GoalsRecordBuilder()..goalName = dummyString;

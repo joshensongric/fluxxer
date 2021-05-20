@@ -2,13 +2,19 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flex_bot/flex_bot_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
 import '../list_messages/list_messages_widget.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageWidget extends StatefulWidget {
-  HomePageWidget({Key key}) : super(key: key);
+  HomePageWidget({
+    Key key,
+    this.json,
+  }) : super(key: key);
+
+  final dynamic json;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -119,12 +125,157 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           fontSize: 32,
                         ),
                       ),
-                      Text(
-                        'Tab View 2',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 32,
-                        ),
+                      Stack(
+                        children: [
+                          Text(
+                            'Tab View 2',
+                            style: FlutterFlowTheme.bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 32,
+                            ),
+                          ),
+                          GridView(
+                            padding: EdgeInsets.zero,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 1,
+                            ),
+                            scrollDirection: Axis.vertical,
+                            children: [
+                              Card(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                color: Color(0xFFF5F5F5),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [],
+                              ),
+                              Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFEEEEEE),
+                                ),
+                              ),
+                              Card(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                color: Color(0xFFF5F5F5),
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    StreamBuilder<List<CirclesRecord>>(
+                                      stream: queryCirclesRecord(
+                                        queryBuilder: (circlesRecord) =>
+                                            circlesRecord.where('users',
+                                                arrayContains:
+                                                    currentUserReference),
+                                        singleRecord: true,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                              child:
+                                                  CircularProgressIndicator());
+                                        }
+                                        List<CirclesRecord>
+                                            imageCirclesRecordList =
+                                            snapshot.data;
+                                        // Customize what your widget looks like with no query results.
+                                        if (snapshot.data.isEmpty) {
+                                          // return Container();
+                                          // For now, we'll just include some dummy data.
+                                          imageCirclesRecordList =
+                                              createDummyCirclesRecord(
+                                                  count: 1);
+                                        }
+                                        final imageCirclesRecord =
+                                            imageCirclesRecordList.first;
+                                        return InkWell(
+                                          onDoubleTap: () async {
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ListMessagesWidget(),
+                                              ),
+                                            );
+                                          },
+                                          child: Image.asset(
+                                            'assets/images/Flex Together LOGO (1024).png',
+                                            width: double.infinity,
+                                            height: 120,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(15, 15, 15, 25),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 10, 0, 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Card Title',
+                                                  style: FlutterFlowTheme
+                                                      .bodyText1
+                                                      .override(
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  getCurrentTimestamp
+                                                      .toString(),
+                                                  style: FlutterFlowTheme
+                                                      .bodyText1
+                                                      .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme
+                                                        .secondaryColor,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 8, 0, 0),
+                                            child: Text(
+                                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida mattis lorem, et posuere tortor rutrum vitae. Vivamus lacinia fringilla libero, at maximus quam imperdiet sed. Pellentesque egestas eget ex a consectetur.',
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Poppins',
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        ],
                       ),
                       Text(
                         'Tab View 3',

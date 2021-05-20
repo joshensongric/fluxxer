@@ -8,7 +8,7 @@ import 'transactions_record.dart';
 import 'goals_record.dart';
 import 'steps_record.dart';
 import 'circles_record.dart';
-import 'transaction_categories_record.dart';
+import 'categories_record.dart';
 
 part 'serializers.g.dart';
 
@@ -20,7 +20,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   GoalsRecord,
   StepsRecord,
   CirclesRecord,
-  TransactionCategoriesRecord,
+  CategoriesRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
