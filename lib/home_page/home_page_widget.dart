@@ -4,7 +4,7 @@ import '../flex_bot/flex_bot_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../list_messages/list_messages_widget.dart';
-import '../main.dart';
+import '../list_transactions/list_transactions_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -91,8 +91,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'listTransactions'),
+                            builder: (context) => ListTransactionsWidget(),
                           ),
                         );
                       },
@@ -118,12 +117,40 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 Expanded(
                   child: TabBarView(
                     children: [
-                      Text(
-                        'Tab View 1',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 32,
-                        ),
+                      Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment(0, 0),
+                            child: Card(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              color: Color(0xFFF5F5F5),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment(0, 0),
+                            child: ListTile(
+                              title: Text(
+                                'Lorem ipsum dolor...',
+                                style: FlutterFlowTheme.title3.override(
+                                  fontFamily: 'Quicksand',
+                                ),
+                              ),
+                              subtitle: Text(
+                                'Lorem ipsum dolor...',
+                                style: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Color(0xFF303030),
+                                size: 20,
+                              ),
+                              tileColor: Color(0xFFF5F5F5),
+                              dense: false,
+                            ),
+                          )
+                        ],
                       ),
                       Stack(
                         children: [

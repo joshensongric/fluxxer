@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -350,7 +351,9 @@ class _ListTransactionsWidgetState extends State<ListTransactionsWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            '-\$360.20',
+                                            listTransactionsTransactionsRecord
+                                                .amount
+                                                .toString(),
                                             style: FlutterFlowTheme.subtitle1
                                                 .override(
                                               fontFamily: 'Poppins',
@@ -361,7 +364,9 @@ class _ListTransactionsWidgetState extends State<ListTransactionsWidget> {
                                             child: Align(
                                               alignment: Alignment(0.7, 0),
                                               child: Text(
-                                                '[Time Stamp]',
+                                                listTransactionsTransactionsRecord
+                                                    .date
+                                                    .toString(),
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
                                                   color: Color(0xFF57636C),
@@ -381,7 +386,8 @@ class _ListTransactionsWidgetState extends State<ListTransactionsWidget> {
                                               padding: EdgeInsets.fromLTRB(
                                                   0, 4, 4, 0),
                                               child: Text(
-                                                'My Coffee Shop',
+                                                listTransactionsTransactionsRecord
+                                                    .merchant,
                                                 style: FlutterFlowTheme
                                                     .bodyText2
                                                     .override(
@@ -414,85 +420,102 @@ class _ListTransactionsWidgetState extends State<ListTransactionsWidget> {
                                 width: 1,
                               ),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width: 60,
-                                        height: 60,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/credit.svg',
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
+                            child: FutureBuilder<dynamic>(
+                              future: transactionsdbCall(
+                                id: currentUserUid,
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                final rowTransactionsdbResponse = snapshot.data;
+                                return Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            '+\$502.50',
-                                            style: FlutterFlowTheme.subtitle1
-                                                .override(
-                                              fontFamily: 'Poppins',
-                                              color: Color(0xFF15212B),
+                                          Container(
+                                            width: 60,
+                                            height: 60,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment(0.7, 0),
-                                              child: Text(
-                                                '[Time Stamp]',
-                                                textAlign: TextAlign.end,
-                                                style: TextStyle(
-                                                  color: Color(0xFF57636C),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 10,
-                                                ),
-                                              ),
+                                            child: Image.asset(
+                                              'assets/images/credit.svg',
                                             ),
                                           )
                                         ],
                                       ),
-                                      Row(
+                                    ),
+                                    Expanded(
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  0, 4, 4, 0),
-                                              child: Text(
-                                                'Cedar Coffee & Supply',
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                '+\$502.50',
                                                 style: FlutterFlowTheme
-                                                    .bodyText2
+                                                    .subtitle1
                                                     .override(
                                                   fontFamily: 'Poppins',
-                                                  fontSize: 12,
+                                                  color: Color(0xFF15212B),
                                                 ),
                                               ),
-                                            ),
+                                              Expanded(
+                                                child: Align(
+                                                  alignment: Alignment(0.7, 0),
+                                                  child: Text(
+                                                    '[Time Stamp]',
+                                                    textAlign: TextAlign.end,
+                                                    style: TextStyle(
+                                                      color: Color(0xFF57636C),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 4, 4, 0),
+                                                  child: Text(
+                                                    'Cedar Coffee & Supply',
+                                                    style: FlutterFlowTheme
+                                                        .bodyText2
+                                                        .override(
+                                                      fontFamily: 'Poppins',
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           )
                                         ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                                      ),
+                                    )
+                                  ],
+                                );
+                              },
                             ),
                           )
                         ],
