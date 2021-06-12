@@ -61,6 +61,7 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                         child: TextFormField(
+                          onChanged: (_) => setState(() {}),
                           controller: textController,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -100,6 +101,18 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
                               Icons.phone_android,
                               color: Color(0xFF0CC873),
                             ),
+                            suffixIcon: textController.text.isNotEmpty
+                                ? InkWell(
+                                    onTap: () => setState(
+                                      () => textController.clear(),
+                                    ),
+                                    child: Icon(
+                                      Icons.clear,
+                                      color: Color(0xFF757575),
+                                      size: 22,
+                                    ),
+                                  )
+                                : null,
                           ),
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'Quicksand',
