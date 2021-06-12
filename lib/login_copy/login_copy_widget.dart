@@ -1,20 +1,20 @@
 import '../account/account_widget.dart';
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../phoneauth/phoneauth_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginWidget extends StatefulWidget {
-  LoginWidget({Key key}) : super(key: key);
+class LoginCopyWidget extends StatefulWidget {
+  LoginCopyWidget({Key key}) : super(key: key);
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _LoginCopyWidgetState createState() => _LoginCopyWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginCopyWidgetState extends State<LoginCopyWidget> {
   TextEditingController emailTextController;
   TextEditingController passwordTextController;
   bool passwordVisibility;
@@ -390,11 +390,34 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ),
                                 InkWell(
                                   onTap: () async {
-                                    await Navigator.push(
+                                    final user = await createAccountWithEmail(
+                                      context,
+                                      emailTextController.text,
+                                      passwordTextController.text,
+                                    );
+                                    if (user == null) {
+                                      return;
+                                    }
+
+                                    final email = '';
+                                    final displayName = '';
+
+                                    final usersRecordData =
+                                        createUsersRecordData(
+                                      email: email,
+                                      displayName: displayName,
+                                    );
+
+                                    await UsersRecord.collection
+                                        .doc(user.uid)
+                                        .update(usersRecordData);
+
+                                    await Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PhoneauthWidget(),
+                                        builder: (context) => AccountWidget(),
                                       ),
+                                      (r) => false,
                                     );
                                   },
                                   child: Text(

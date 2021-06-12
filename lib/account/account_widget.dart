@@ -1,15 +1,13 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../splash/splash_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AccountWidget extends StatefulWidget {
-  AccountWidget({
-    Key key,
-    this.authToken,
-  }) : super(key: key);
-
-  final String authToken;
+  AccountWidget({Key key}) : super(key: key);
 
   @override
   _AccountWidgetState createState() => _AccountWidgetState();
@@ -31,83 +29,78 @@ class _AccountWidgetState extends State<AccountWidget> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 270,
+                  height: 220,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.primaryColor,
+                    color: Colors.white,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment(0, 0),
-                                  child: Image.asset(
-                                    'assets/images/FT Logo Square (1024 - white).png',
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 150,
-                                    fit: BoxFit.cover,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
+                              child: Container(
+                                width: 76,
+                                height: 76,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.asset(
+                                  'assets/images/UI_avatar@2x.png',
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment(0.85, 0),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                                  child: Icon(
+                                    Icons.edit_outlined,
+                                    color: Color(0xFF95A1AC),
+                                    size: 24,
                                   ),
                                 ),
-                                Align(
-                                  alignment: Alignment(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 105, 0, 0),
-                                    child: Container(
-                                      width: 80,
-                                      height: 80,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/UI_avatar@2x.png',
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                            child: Text(
-                              '[User Name Here]',
-                              style: FlutterFlowTheme.title1.override(
-                                fontFamily: 'Quicksand',
-                                color: Colors.white,
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
-                            child: Text(
-                              'User.name@domainname.com',
-                              style: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Poppins',
-                                color: FlutterFlowTheme.secondaryColor,
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                              child: Text(
+                                '[User Name Here]',
+                                style: FlutterFlowTheme.title1.override(
+                                  fontFamily: 'Quicksand',
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                              child: Text(
+                                'User.name@domainname.com',
+                                style: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Poppins',
+                                  color: FlutterFlowTheme.secondaryColor,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -301,8 +294,15 @@ class _AccountWidgetState extends State<AccountWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await signOut();
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SplashWidget(),
+                              ),
+                              (r) => false,
+                            );
                           },
                           text: 'Log Out',
                           options: FFButtonOptions(

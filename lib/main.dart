@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'auth/firebase_user_provider.dart';
-import 'package:fluxtogether/login/login_widget.dart';
-import 'package:fluxtogether/list_transactions/list_transactions_widget.dart';
+import 'package:fluxtogether/splash/splash_widget.dart';
+import 'package:fluxtogether/account/account_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,14 +33,18 @@ class _MyAppState extends State<MyApp> {
       title: 'fluxtogether',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: initialUser == null
-          ? const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xff4b39ef)),
+          ? Center(
+              child: Builder(
+                builder: (context) => Image.asset(
+                  'assets/images/FT Splash Screen.png',
+                  width: MediaQuery.of(context).size.width / 2,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             )
           : currentUser.loggedIn
-              ? ListTransactionsWidget()
-              : LoginWidget(),
+              ? AccountWidget()
+              : SplashWidget(),
     );
   }
 }
