@@ -1,4 +1,3 @@
-import '../account/account_widget.dart';
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -313,11 +312,6 @@ class _SplashWidgetState extends State<SplashWidget> {
                                         EdgeInsets.fromLTRB(20, 20, 20, 10),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        final user =
-                                            await signInAnonymously(context);
-                                        if (user == null) {
-                                          return;
-                                        }
                                         if (textController.text.isEmpty ||
                                             !textController.text
                                                 .startsWith('+')) {
@@ -343,14 +337,6 @@ class _SplashWidgetState extends State<SplashWidget> {
                                               (r) => false,
                                             );
                                           },
-                                        );
-                                        await Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                AccountWidget(),
-                                          ),
-                                          (r) => false,
                                         );
                                       },
                                       text: 'Get started',
