@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "710884072219",
+    "project_id": "fluxxer-e6665",
+    "storage_bucket": "fluxxer-e6665.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710884072219:android:7091ecb08992f2d052d1be",
+        "android_client_info": {
+          "package_name": "uk.fluxtogether.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710884072219-plr0gqbc4sklje00mj7hthlc5tjm7dk6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.fluxtogether.app",
+            "certificate_hash": "d9c74373f14f7e911ed7af408fbacb62098b27b2"
+          }
+        },
+        {
+          "client_id": "710884072219-qdcrlaemor76eck0ddk4b0tkom0o8r2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQQc8JkLEu36O9OT11khoJlz4U07tYapc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710884072219-qdcrlaemor76eck0ddk4b0tkom0o8r2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "710884072219-8g0bo7urouo0mpj3oc7rpqefdggi510j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "uk.fluxtogether.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

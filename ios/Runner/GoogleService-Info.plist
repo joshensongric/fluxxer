@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>710884072219-8g0bo7urouo0mpj3oc7rpqefdggi510j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.710884072219-8g0bo7urouo0mpj3oc7rpqefdggi510j</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDa0gIfjN-QMcLsuGQV8fKrEd9km4ZHy68</string>
+	<key>GCM_SENDER_ID</key>
+	<string>710884072219</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>uk.fluxtogether.app</string>
+	<key>PROJECT_ID</key>
+	<string>fluxxer-e6665</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fluxxer-e6665.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:710884072219:ios:be45f9a0adfcabde52d1be</string>
+</dict>
+</plist>
