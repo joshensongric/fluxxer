@@ -1,6 +1,3 @@
-import '../account/account_widget.dart';
-import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -15,16 +12,16 @@ class LoginCopyWidget extends StatefulWidget {
 }
 
 class _LoginCopyWidgetState extends State<LoginCopyWidget> {
-  TextEditingController emailTextController;
-  TextEditingController passwordTextController;
+  TextEditingController textController1;
+  TextEditingController textController2;
   bool passwordVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    emailTextController = TextEditingController();
-    passwordTextController = TextEditingController();
+    textController1 = TextEditingController();
+    textController2 = TextEditingController();
     passwordVisibility = false;
   }
 
@@ -91,7 +88,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                   child: TextFormField(
-                                    controller: emailTextController,
+                                    controller: textController1,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       hintText: 'Email',
@@ -142,7 +139,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                   child: TextFormField(
-                                    controller: passwordTextController,
+                                    controller: textController2,
                                     obscureText: !passwordVisibility,
                                     decoration: InputDecoration(
                                       hintText: 'Password',
@@ -196,23 +193,8 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                               child: FFButtonWidget(
-                                onPressed: () async {
-                                  final user = await signInWithEmail(
-                                    context,
-                                    emailTextController.text,
-                                    passwordTextController.text,
-                                  );
-                                  if (user == null) {
-                                    return;
-                                  }
-
-                                  await Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => AccountWidget(),
-                                    ),
-                                    (r) => false,
-                                  );
+                                onPressed: () {
+                                  print('Button pressed ...');
                                 },
                                 text: 'Sign in',
                                 options: FFButtonOptions(
@@ -272,21 +254,8 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                           ),
                                         ),
                                         FFButtonWidget(
-                                          onPressed: () async {
-                                            final user =
-                                                await signInWithFacebook(
-                                                    context);
-                                            if (user == null) {
-                                              return;
-                                            }
-                                            await Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AccountWidget(),
-                                              ),
-                                              (r) => false,
-                                            );
+                                          onPressed: () {
+                                            print('Button pressed ...');
                                           },
                                           text: 'Sign in',
                                           icon: Icon(
@@ -338,22 +307,8 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                           Align(
                                             alignment: Alignment(0, 0),
                                             child: FFButtonWidget(
-                                              onPressed: () async {
-                                                final user =
-                                                    await signInWithGoogle(
-                                                        context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-                                                await Navigator
-                                                    .pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        AccountWidget(),
-                                                  ),
-                                                  (r) => false,
-                                                );
+                                              onPressed: () {
+                                                print('Button pressed ...');
                                               },
                                               text: 'Sign in',
                                               icon: Icon(
@@ -401,45 +356,12 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                     ),
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () async {
-                                    final user = await createAccountWithEmail(
-                                      context,
-                                      emailTextController.text,
-                                      passwordTextController.text,
-                                    );
-                                    if (user == null) {
-                                      return;
-                                    }
-
-                                    final email = '';
-                                    final displayName = '';
-
-                                    final usersRecordData =
-                                        createUsersRecordData(
-                                      email: email,
-                                      displayName: displayName,
-                                    );
-
-                                    await UsersRecord.collection
-                                        .doc(user.uid)
-                                        .update(usersRecordData);
-
-                                    await Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AccountWidget(),
-                                      ),
-                                      (r) => false,
-                                    );
-                                  },
-                                  child: Text(
-                                    'Sign Up',
-                                    style: GoogleFonts.getFont(
-                                      'Quicksand',
-                                      color: FlutterFlowTheme.secondaryColor,
-                                      fontSize: 14,
-                                    ),
+                                Text(
+                                  'Sign Up',
+                                  style: GoogleFonts.getFont(
+                                    'Quicksand',
+                                    color: FlutterFlowTheme.secondaryColor,
+                                    fontSize: 14,
                                   ),
                                 )
                               ],

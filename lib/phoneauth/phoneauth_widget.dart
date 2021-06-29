@@ -3,7 +3,6 @@ import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../phoneauth_copy/phoneauth_copy_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -145,7 +144,7 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
                                 fontSize: 32,
                               ),
                               textAlign: TextAlign.center,
-                              keyboardType: TextInputType.phone,
+                              keyboardType: TextInputType.number,
                               validator: (val) {
                                 if (val.isEmpty) {
                                   return 'Field is required';
