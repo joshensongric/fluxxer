@@ -1,10 +1,8 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'circles_record.g.dart';
 
@@ -44,26 +42,21 @@ abstract class CirclesRecord
   CirclesRecord._();
   factory CirclesRecord([void Function(CirclesRecordBuilder) updates]) =
       _$CirclesRecord;
+
+  static CirclesRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createCirclesRecordData({
   String name,
   String picture,
 }) =>
-    serializers.serializeWith(
+    serializers.toFirestore(
         CirclesRecord.serializer,
         CirclesRecord((c) => c
           ..name = name
           ..users = null
           ..transactions = null
           ..picture = picture));
-
-CirclesRecord get dummyCirclesRecord {
-  final builder = CirclesRecordBuilder()
-    ..name = dummyString
-    ..picture = dummyImagePath;
-  return builder.build();
-}
-
-List<CirclesRecord> createDummyCirclesRecord({int count}) =>
-    List.generate(count, (_) => dummyCirclesRecord);

@@ -65,7 +65,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                 flex: 3,
                 child: Container(
                   width: double.infinity,
-                  height: 100,
+                  height: 5,
                   decoration: BoxDecoration(
                     color: Color(0xFFEEEEEE),
                     borderRadius: BorderRadius.circular(30),
@@ -74,7 +74,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                     padding: EdgeInsets.fromLTRB(0, 60, 0, 60),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Column(
                           mainAxisSize: MainAxisSize.max,
@@ -272,8 +272,21 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                           ),
                                         ),
                                         FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
+                                          onPressed: () async {
+                                            final user =
+                                                await signInWithFacebook(
+                                                    context);
+                                            if (user == null) {
+                                              return;
+                                            }
+                                            await Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AccountWidget(),
+                                              ),
+                                              (r) => false,
+                                            );
                                           },
                                           text: 'Sign in',
                                           icon: Icon(

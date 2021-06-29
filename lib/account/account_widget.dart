@@ -2,7 +2,6 @@ import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../home/home_widget.dart';
 import '../splash/splash_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -180,39 +179,29 @@ class _AccountWidgetState extends State<AccountWidget> {
                             color: Colors.white,
                             shape: BoxShape.rectangle,
                           ),
-                          child: InkWell(
-                            onTap: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeWidget(),
-                                ),
-                              );
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-                                  child: Text(
-                                    'Settings',
-                                    style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                    ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+                                child: Text(
+                                  'Settings',
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Poppins',
                                   ),
                                 ),
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment(0.9, 0),
-                                    child: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: Color(0xFF95A1AC),
-                                      size: 18,
-                                    ),
+                              ),
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment(0.9, 0),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Color(0xFF95A1AC),
+                                    size: 18,
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ),
                         )
                       ],

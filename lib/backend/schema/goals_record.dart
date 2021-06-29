@@ -1,10 +1,8 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'goals_record.g.dart';
 
@@ -39,23 +37,20 @@ abstract class GoalsRecord implements Built<GoalsRecord, GoalsRecordBuilder> {
   GoalsRecord._();
   factory GoalsRecord([void Function(GoalsRecordBuilder) updates]) =
       _$GoalsRecord;
+
+  static GoalsRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createGoalsRecordData({
   String goalName,
   DocumentReference user,
 }) =>
-    serializers.serializeWith(
+    serializers.toFirestore(
         GoalsRecord.serializer,
         GoalsRecord((g) => g
           ..goalName = goalName
           ..steps = null
           ..user = user));
-
-GoalsRecord get dummyGoalsRecord {
-  final builder = GoalsRecordBuilder()..goalName = dummyString;
-  return builder.build();
-}
-
-List<GoalsRecord> createDummyGoalsRecord({int count}) =>
-    List.generate(count, (_) => dummyGoalsRecord);

@@ -1,10 +1,8 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'transactions_record.g.dart';
 
@@ -14,7 +12,7 @@ abstract class TransactionsRecord
       _$transactionsRecordSerializer;
 
   @nullable
-  Timestamp get date;
+  DateTime get date;
 
   @nullable
   String get merchant;
@@ -47,16 +45,21 @@ abstract class TransactionsRecord
   factory TransactionsRecord(
           [void Function(TransactionsRecordBuilder) updates]) =
       _$TransactionsRecord;
+
+  static TransactionsRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createTransactionsRecordData({
-  Timestamp date,
+  DateTime date,
   String merchant,
   double amount,
   DocumentReference user,
   DocumentReference category,
 }) =>
-    serializers.serializeWith(
+    serializers.toFirestore(
         TransactionsRecord.serializer,
         TransactionsRecord((t) => t
           ..date = date
@@ -64,14 +67,3 @@ Map<String, dynamic> createTransactionsRecordData({
           ..amount = amount
           ..user = user
           ..category = category));
-
-TransactionsRecord get dummyTransactionsRecord {
-  final builder = TransactionsRecordBuilder()
-    ..date = dummyTimestamp
-    ..merchant = dummyString
-    ..amount = dummyDouble;
-  return builder.build();
-}
-
-List<TransactionsRecord> createDummyTransactionsRecord({int count}) =>
-    List.generate(count, (_) => dummyTransactionsRecord);

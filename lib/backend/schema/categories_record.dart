@@ -1,10 +1,8 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'categories_record.g.dart';
 
@@ -33,18 +31,15 @@ abstract class CategoriesRecord
   CategoriesRecord._();
   factory CategoriesRecord([void Function(CategoriesRecordBuilder) updates]) =
       _$CategoriesRecord;
+
+  static CategoriesRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createCategoriesRecordData({
   String name,
 }) =>
-    serializers.serializeWith(
+    serializers.toFirestore(
         CategoriesRecord.serializer, CategoriesRecord((c) => c..name = name));
-
-CategoriesRecord get dummyCategoriesRecord {
-  final builder = CategoriesRecordBuilder()..name = dummyString;
-  return builder.build();
-}
-
-List<CategoriesRecord> createDummyCategoriesRecord({int count}) =>
-    List.generate(count, (_) => dummyCategoriesRecord);

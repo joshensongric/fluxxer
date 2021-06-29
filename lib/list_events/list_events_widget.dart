@@ -137,7 +137,7 @@ class _ListEventsWidgetState extends State<ListEventsWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Short description goes here and can be more\nthan one line. Two lines is the best length… ',
+                                            'Short description goes here and can be more\\nthan one line. Two lines is the best length… ',
                                             style: FlutterFlowTheme.bodyText2
                                                 .override(
                                               fontFamily: 'Poppins',
@@ -288,7 +288,7 @@ class _ListEventsWidgetState extends State<ListEventsWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Short description goes here and can be more\nthan one line. Two lines is the best length… ',
+                                            'Short description goes here and can be more\\nthan one line. Two lines is the best length… ',
                                             style: FlutterFlowTheme.bodyText2
                                                 .override(
                                               fontFamily: 'Poppins',
@@ -454,7 +454,7 @@ class _ListEventsWidgetState extends State<ListEventsWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Short description goes here and can be more\nthan one line. Two lines is the best length… ',
+                                            'Short description goes here and can be more\\nthan one line. Two lines is the best length… ',
                                             style: FlutterFlowTheme.bodyText2
                                                 .override(
                                               fontFamily: 'Poppins',

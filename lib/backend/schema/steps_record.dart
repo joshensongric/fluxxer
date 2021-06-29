@@ -1,10 +1,8 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'steps_record.g.dart';
 
@@ -32,18 +30,15 @@ abstract class StepsRecord implements Built<StepsRecord, StepsRecordBuilder> {
   StepsRecord._();
   factory StepsRecord([void Function(StepsRecordBuilder) updates]) =
       _$StepsRecord;
+
+  static StepsRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createStepsRecordData({
   String stepName,
 }) =>
-    serializers.serializeWith(
+    serializers.toFirestore(
         StepsRecord.serializer, StepsRecord((s) => s..stepName = stepName));
-
-StepsRecord get dummyStepsRecord {
-  final builder = StepsRecordBuilder()..stepName = dummyString;
-  return builder.build();
-}
-
-List<StepsRecord> createDummyStepsRecord({int count}) =>
-    List.generate(count, (_) => dummyStepsRecord);

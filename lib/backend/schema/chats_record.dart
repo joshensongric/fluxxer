@@ -1,10 +1,8 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'chats_record.g.dart';
 
@@ -28,7 +26,7 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
 
   @nullable
   @BuiltValueField(wireName: 'last_message_time')
-  Timestamp get lastMessageTime;
+  DateTime get lastMessageTime;
 
   @nullable
   @BuiltValueField(wireName: 'last_message_seen_by')
@@ -53,15 +51,20 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
   ChatsRecord._();
   factory ChatsRecord([void Function(ChatsRecordBuilder) updates]) =
       _$ChatsRecord;
+
+  static ChatsRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createChatsRecordData({
   DocumentReference userA,
   DocumentReference userB,
   String lastMessage,
-  Timestamp lastMessageTime,
+  DateTime lastMessageTime,
 }) =>
-    serializers.serializeWith(
+    serializers.toFirestore(
         ChatsRecord.serializer,
         ChatsRecord((c) => c
           ..users = null
@@ -70,13 +73,3 @@ Map<String, dynamic> createChatsRecordData({
           ..lastMessage = lastMessage
           ..lastMessageTime = lastMessageTime
           ..lastMessageSeenBy = null));
-
-ChatsRecord get dummyChatsRecord {
-  final builder = ChatsRecordBuilder()
-    ..lastMessage = dummyString
-    ..lastMessageTime = dummyTimestamp;
-  return builder.build();
-}
-
-List<ChatsRecord> createDummyChatsRecord({int count}) =>
-    List.generate(count, (_) => dummyChatsRecord);
