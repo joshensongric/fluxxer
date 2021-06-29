@@ -23,7 +23,7 @@ class _SplashWidgetState extends State<SplashWidget> {
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController(text: currentPhoneNumber);
+    textController = TextEditingController();
   }
 
   @override
@@ -234,7 +234,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(10, 0, 20, 10),
                                     child: Text(
-                                      'Signup',
+                                      'Login',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.title3.override(
                                         fontFamily: 'Quicksand',
@@ -265,6 +265,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                         padding:
                                             EdgeInsets.fromLTRB(20, 0, 20, 0),
                                         child: TextFormField(
+                                          onChanged: (_) => setState(() {}),
                                           controller: textController,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -296,6 +297,21 @@ class _SplashWidgetState extends State<SplashWidget> {
                                                 topRight: Radius.circular(4.0),
                                               ),
                                             ),
+                                            suffixIcon:
+                                                textController.text.isNotEmpty
+                                                    ? InkWell(
+                                                        onTap: () => setState(
+                                                          () => textController
+                                                              .clear(),
+                                                        ),
+                                                        child: Icon(
+                                                          Icons.clear,
+                                                          color: FlutterFlowTheme
+                                                              .secondaryColor,
+                                                          size: 22,
+                                                        ),
+                                                      )
+                                                    : null,
                                           ),
                                           style: FlutterFlowTheme.subtitle2
                                               .override(
