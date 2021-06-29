@@ -1,3 +1,4 @@
+import '../account/account_widget.dart';
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -40,10 +41,29 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(50, 100, 50, 100),
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFEEEEEE),
+                          ),
+                          child: Image.asset(
+                            'assets/images/FT Logo Square (1024 - white).png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                       child: Text(
-                        'Mobile',
+                        'Verify SMS',
                         style: FlutterFlowTheme.bodyText1.override(
                           fontFamily: 'Poppins',
                           color: FlutterFlowTheme.secondaryColor,
@@ -70,7 +90,7 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
                               controller: textController,
                               obscureText: false,
                               decoration: InputDecoration(
-                                hintText: '07xxx xxxxxx',
+                                hintText: 'xxxxxx',
                                 hintStyle: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Quicksand',
                                   color: Color(0xFF696871),
@@ -147,28 +167,27 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
                             if (!formKey.currentState.validate()) {
                               return;
                             }
-                            if (textController.text.isEmpty ||
-                                !textController.text.startsWith('+')) {
+                            if (textController.text.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(
-                                      'Phone Number is required and has to start with +.'),
+                                  content: Text('Enter SMS verification code.'),
                                 ),
                               );
                               return;
                             }
-                            await beginPhoneAuth(
+                            final phoneVerifiedUser = await verifySmsCode(
                               context: context,
-                              phoneNumber: textController.text,
-                              onCodeSent: () async {
-                                await Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PhoneauthCopyWidget(),
-                                  ),
-                                  (r) => false,
-                                );
-                              },
+                              smsCode: textController.text,
+                            );
+                            if (phoneVerifiedUser == null) {
+                              return;
+                            }
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AccountWidget(),
+                              ),
+                              (r) => false,
                             );
                           },
                           text: 'Next',

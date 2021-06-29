@@ -1,6 +1,8 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../phoneauth/phoneauth_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -309,8 +311,33 @@ class _SplashWidgetState extends State<SplashWidget> {
                                     padding:
                                         EdgeInsets.fromLTRB(20, 20, 20, 10),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        if (textController.text.isEmpty ||
+                                            !textController.text
+                                                .startsWith('+')) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                  'Phone Number is required and has to start with +.'),
+                                            ),
+                                          );
+                                          return;
+                                        }
+                                        await beginPhoneAuth(
+                                          context: context,
+                                          phoneNumber: textController.text,
+                                          onCodeSent: () async {
+                                            await Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PhoneauthWidget(),
+                                              ),
+                                              (r) => false,
+                                            );
+                                          },
+                                        );
                                       },
                                       text: 'Get started',
                                       options: FFButtonOptions(
