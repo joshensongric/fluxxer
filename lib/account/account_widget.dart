@@ -51,7 +51,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.asset(
-                                  'assets/images/UI_avatar@2x.png',
+                                  'assets/images/',
                                 ),
                               ),
                             ),

@@ -12,43 +12,13 @@ service cloud.firestore {
 
     // WARNING! ONLY FOR TEST MODE: Make sure you properly configure the
     // security rules for this collection before publishing your app.
-    match /transactions/{id} {
-      allow read, write: if true;
-    }
-
-    // WARNING! ONLY FOR TEST MODE: Make sure you properly configure the
-    // security rules for this collection before publishing your app.
-    match /goals/{id} {
-      allow read, write: if true;
-    }
-
-    // WARNING! ONLY FOR TEST MODE: Make sure you properly configure the
-    // security rules for this collection before publishing your app.
-    match /steps/{id} {
-      allow read, write: if true;
-    }
-
-    // WARNING! ONLY FOR TEST MODE: Make sure you properly configure the
-    // security rules for this collection before publishing your app.
-    match /circles/{id} {
-      allow read, write: if true;
-    }
-
-    // WARNING! ONLY FOR TEST MODE: Make sure you properly configure the
-    // security rules for this collection before publishing your app.
     match /categories/{id} {
       allow read, write: if true;
     }
 
     // WARNING! ONLY FOR TEST MODE: Make sure you properly configure the
     // security rules for this collection before publishing your app.
-    match /chats/{id} {
-      allow read, write: if true;
-    }
-
-    // WARNING! ONLY FOR TEST MODE: Make sure you properly configure the
-    // security rules for this collection before publishing your app.
-    match /chat_messages/{id} {
+    match /accounts/{id} {
       allow read, write: if true;
     }
   }

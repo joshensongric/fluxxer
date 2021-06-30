@@ -5,13 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
-import 'schema/transactions_record.dart';
-import 'schema/goals_record.dart';
-import 'schema/steps_record.dart';
-import 'schema/circles_record.dart';
 import 'schema/categories_record.dart';
-import 'schema/chats_record.dart';
-import 'schema/chat_messages_record.dart';
+import 'schema/accounts_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,48 +14,14 @@ export 'schema/index.dart';
 export 'schema/serializers.dart';
 
 export 'schema/users_record.dart';
-export 'schema/transactions_record.dart';
-export 'schema/goals_record.dart';
-export 'schema/steps_record.dart';
-export 'schema/circles_record.dart';
 export 'schema/categories_record.dart';
-export 'schema/chats_record.dart';
-export 'schema/chat_messages_record.dart';
+export 'schema/accounts_record.dart';
 
 Stream<List<UsersRecord>> queryUsersRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollection(UsersRecord.collection, UsersRecord.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
-Stream<List<TransactionsRecord>> queryTransactionsRecord(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(
-        TransactionsRecord.collection, TransactionsRecord.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
-Stream<List<GoalsRecord>> queryGoalsRecord(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(GoalsRecord.collection, GoalsRecord.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
-Stream<List<StepsRecord>> queryStepsRecord(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(StepsRecord.collection, StepsRecord.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
-Stream<List<CirclesRecord>> queryCirclesRecord(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(CirclesRecord.collection, CirclesRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<CategoriesRecord>> queryCategoriesRecord(
@@ -70,19 +31,11 @@ Stream<List<CategoriesRecord>> queryCategoriesRecord(
     queryCollection(CategoriesRecord.collection, CategoriesRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Stream<List<ChatsRecord>> queryChatsRecord(
+Stream<List<AccountsRecord>> queryAccountsRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(ChatsRecord.collection, ChatsRecord.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
-Stream<List<ChatMessagesRecord>> queryChatMessagesRecord(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(
-        ChatMessagesRecord.collection, ChatMessagesRecord.serializer,
+    queryCollection(AccountsRecord.collection, AccountsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

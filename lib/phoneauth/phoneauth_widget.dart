@@ -1,8 +1,8 @@
-import '../account/account_widget.dart';
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -184,7 +184,8 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
                             await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AccountWidget(),
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'Account'),
                               ),
                               (r) => false,
                             );
