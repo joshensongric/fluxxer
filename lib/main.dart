@@ -4,6 +4,9 @@ import 'auth/firebase_user_provider.dart';
 import 'package:fluxtogether/splash/splash_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'list_events/list_events_widget.dart';
+import 'flex_bot/flex_bot_widget.dart';
+import 'money/money_widget.dart';
+import 'all_chats/all_chats_widget.dart';
 import 'account/account_widget.dart';
 
 void main() async {
@@ -74,6 +77,9 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'ListEvents': ListEventsWidget(),
+      'FlexBot': FlexBotWidget(),
+      'Money': MoneyWidget(),
+      'AllChats': AllChatsWidget(),
       'Account': AccountWidget(),
     };
     return Scaffold(
@@ -86,6 +92,28 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 32,
             ),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+              color: Color(0xFF9E9E9E),
+              size: 24,
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.payment,
+              size: 32,
+            ),
+            label: 'Money',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.chat,
+              size: 24,
+            ),
+            label: 'Chats',
           ),
           BottomNavigationBarItem(
             icon: Icon(
