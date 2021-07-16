@@ -186,13 +186,13 @@ class _Login2WidgetState extends State<Login2Widget> {
                           return;
                         }
 
-                        final usersRecordData = createUsersRecordData(
+                        final usersCreateData = createUsersRecordData(
                           email: '',
                           phoneNumber: widget.phoneNumber,
                         );
                         await UsersRecord.collection
                             .doc(user.uid)
-                            .update(usersRecordData);
+                            .update(usersCreateData);
 
                         await Navigator.pushAndRemoveUntil(
                           context,

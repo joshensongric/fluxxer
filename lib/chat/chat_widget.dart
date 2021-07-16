@@ -96,7 +96,14 @@ class _ChatWidgetState extends State<ChatWidget> {
                     fontSize: 14,
                   ),
                 )
-              : const Center(child: CircularProgressIndicator()),
+              : const Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.primaryColor),
+                  ),
+                ),
         ),
       ),
     );

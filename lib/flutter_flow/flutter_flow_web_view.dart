@@ -6,8 +6,8 @@ import 'package:webviewx/webviewx.dart';
 class FlutterFlowWebView extends StatefulWidget {
   const FlutterFlowWebView({
     @required this.url,
-    @required this.width,
-    @required this.height,
+    this.width,
+    this.height,
     this.bypass = false,
     this.horizontalScroll = false,
     this.verticalScroll = false,
@@ -27,37 +27,45 @@ class FlutterFlowWebView extends StatefulWidget {
 
 class _FlutterFlowWebViewState extends State<FlutterFlowWebView> {
   @override
-  Widget build(BuildContext context) {
-    return WebViewX(
-      key: Key(
-        '${widget.url}${widget.width}${widget.height}${widget.bypass}${widget.horizontalScroll}${widget.verticalScroll}',
-      ),
-      width: widget.width,
-      height: widget.height,
-      ignoreAllGestures: false,
-      initialContent: widget.url,
-      initialMediaPlaybackPolicy:
-          AutoMediaPlaybackPolicy.require_user_action_for_all_media_types,
-      initialSourceType: widget.bypass ? SourceType.URL_BYPASS : SourceType.URL,
-      javascriptMode: JavascriptMode.unrestricted,
-      webSpecificParams: const WebSpecificParams(
-        webAllowFullscreenContent: true,
-      ),
-      mobileSpecificParams: MobileSpecificParams(
-        debuggingEnabled: false,
-        gestureNavigationEnabled: true,
-        mobileGestureRecognizers: {
-          if (widget.verticalScroll)
-            Factory<VerticalDragGestureRecognizer>(
-              () => VerticalDragGestureRecognizer(),
-            ),
-          if (widget.horizontalScroll)
-            Factory<HorizontalDragGestureRecognizer>(
-              () => HorizontalDragGestureRecognizer(),
-            ),
-        },
-        navigationDelegate: (_) => NavigationDecision.navigate,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => WebViewX(
+        key: webviewKey,
+        width: widget.width,
+        height: widget.height,
+        ignoreAllGestures: false,
+        initialContent: widget.url,
+        initialMediaPlaybackPolicy:
+            AutoMediaPlaybackPolicy.require_user_action_for_all_media_types,
+        initialSourceType:
+            widget.bypass ? SourceType.URL_BYPASS : SourceType.URL,
+        javascriptMode: JavascriptMode.unrestricted,
+        webSpecificParams: const WebSpecificParams(
+          webAllowFullscreenContent: true,
+        ),
+        mobileSpecificParams: MobileSpecificParams(
+          debuggingEnabled: false,
+          gestureNavigationEnabled: true,
+          mobileGestureRecognizers: {
+            if (widget.verticalScroll)
+              Factory<VerticalDragGestureRecognizer>(
+                () => VerticalDragGestureRecognizer(),
+              ),
+            if (widget.horizontalScroll)
+              Factory<HorizontalDragGestureRecognizer>(
+                () => HorizontalDragGestureRecognizer(),
+              ),
+          },
+          navigationDelegate: (_) => NavigationDecision.navigate,
+        ),
+      );
+
+  Key get webviewKey => Key(
+        [
+          widget.url,
+          widget.width,
+          widget.height,
+          widget.bypass,
+          widget.horizontalScroll,
+          widget.verticalScroll,
+        ].map((s) => s?.toString() ?? '').join(),
+      );
 }
